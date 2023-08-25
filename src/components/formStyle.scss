@@ -1,0 +1,52 @@
+.modal-forms {
+  padding: 10px;
+  background: white;
+  display: flex;
+  gap: 20px;
+
+  .orderSizes {
+    display: flex;
+    padding: 5px 0px;
+
+    label {
+      width: 70px;
+      font-weight: 700;
+    }
+
+    // .ant-form-item {
+    //   // width: 10px !important;
+    // }
+  }
+
+  
+}
+
+.ant-form-item {
+  margin: 0 !important;
+  border-radius: 0px !important;
+}
+
+.ant-input-number,
+.ant-input-affix-wrapper,
+.ant-picker,
+#notes {
+  margin: 0 !important;
+  border-radius: 0px !important;
+  // padding: 0px !important;
+}
+
+.checkBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.addOrderModal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  label {
+    font-weight: 600;
+  }
+}

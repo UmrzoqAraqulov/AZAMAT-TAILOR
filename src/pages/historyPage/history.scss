@@ -1,0 +1,14 @@
+nav {
+  .sort {
+    display: flex;
+    gap: 6px;
+    flex-direction: column;
+  }
+  .sort div{
+    display: flex;
+    gap: 5px;
+  }
+  .sort input{
+    padding: 1.5px;
+  }
+}

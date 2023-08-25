@@ -1,0 +1,205 @@
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 7px 5px;
+
+  .hero {
+    width: 65px;
+  }
+
+  .searchBox {
+    position: relative;
+    width: 500px;
+
+    #search {
+      width: 100%;
+      height: 42px;
+      padding: 0 0 0 10px;
+      font-size: 16px;
+      outline: none;
+      border: 1.5px solid rgb(0, 0, 0);
+      transition: 0.2s;
+      &::placeholder{
+        color: black;
+      }
+      @media (max-width: 830px) {
+        padding: 5px;
+      }
+
+      &:focus {
+        box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.25);
+        // border: 1px solid lightgray;
+      }
+    }
+
+    .searchIcon {
+      position: absolute;
+      right: 0px;
+      top: 7px;
+      width: 35px;
+      cursor: pointer;
+      opacity: .6;
+    }
+
+    @media (max-width: 1000px) {
+      width: 350px;
+    }
+
+    @media (max-width: 830px) {
+      flex-grow: 1;
+      margin-left: 10px;
+    }
+  }
+
+     .sort {
+       display: flex;
+       gap: 6px;
+       flex-direction: column;
+     }
+  
+     .sort div {
+       display: flex;
+       gap: 5px;
+     }
+  
+     .sort input {
+       padding: 1.5px;
+     }
+
+  .nav-right {
+    display: flex;
+    gap: 5px;
+
+    .nav-right_btn {
+      outline: none;
+      display: inline-block;
+      font-size: 1rem;
+      text-transform: uppercase;
+      transition: .3s;
+      cursor: pointer;
+      position: relative;
+      border-radius: 0px;
+
+      &:hover {
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      &:active {
+        transform: scale(0.95);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    // .historyBtn {
+    //   background-image: linear-gradient(-60deg, #16a085 0%, #f4d03f 100%);
+    //   text-decoration: none;
+    //   padding: 10px 50px;
+    //   margin-right: 10px;
+    // }
+
+    // .getOrderBtn {
+    //   background: linear-gradient(to bottom, #4dc7d9 0%, #66a6ff 100%);
+    //   padding: 10px 20px;
+    //   &:hover {
+    //     transform: translateY(-3px);
+    //     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+
+    //     #plusIcon {
+    //       transform: rotate(90deg);
+    //     }
+    //   }
+    //   #plusIcon{
+    //     margin-right: 5px;
+    //   }
+    // }
+    .historyBtn {
+      border: 1.5px solid #000000;
+      padding: .8rem 2rem;
+      box-sizing: border-box;
+      background: #ffffff;
+      color: #000000;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        border-top: 2px solid #000000;
+        border-left: 2px solid #000000;
+        width: 0px;
+        height: 0px;
+        opacity: 0;
+        transition: .3s;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+        border-bottom: 2px solid #000000;
+        border-right: 2px solid #000000;
+        width: 0px;
+        height: 0px;
+        opacity: 0;
+        transition: .3s;
+      }
+
+      &:hover::after,
+      &:hover::before {
+        height: 20px;
+        width: 20px;
+        opacity: 1;
+      }
+    }
+
+    .getOrderBtn {
+
+      border: 1px solid #000000;
+      padding: .8rem 1.2rem;
+
+      background: black;
+      color: #fff;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        border-top: 2px solid #fff;
+        border-left: 2px solid #fff;
+        width: 0px;
+        height: 0px;
+        opacity: 0;
+        transition: .3s;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+        border-bottom: 2px solid #fff;
+        border-right: 2px solid #fff;
+        width: 0px;
+        height: 0px;
+        opacity: 0;
+        transition: .3s;
+      }
+
+      &:hover {
+        box-shadow: 4px 0px 10px rgb(184, 184, 184);
+        // transform: translateY(-5px);
+
+      }
+
+      &:hover::after,
+      &:hover::before {
+        height: 20px;
+        width: 20px;
+        opacity: 1;
+      }
+    }
+  }
+}
