@@ -1,3 +1,5 @@
+// RANGLAR UZGARTIRILDI TABLE HEAD VA BUTTON LARDA
+
 nav {
   display: flex;
   align-items: center;
@@ -18,11 +20,14 @@ nav {
       padding: 0 0 0 10px;
       font-size: 16px;
       outline: none;
-      border: 1.5px solid rgb(0, 0, 0);
+      border: 1.5px solid #172f6c;
       transition: 0.2s;
-      &::placeholder{
-        color: black;
+      color: #172f6c;
+
+      &::placeholder {
+        color: #172f6c;
       }
+
       @media (max-width: 830px) {
         padding: 5px;
       }
@@ -36,36 +41,32 @@ nav {
     .searchIcon {
       position: absolute;
       right: 0px;
-      top: 7px;
+      top: 6px;
       width: 35px;
       cursor: pointer;
-      opacity: .6;
+      opacity: 0.6;
     }
 
-    @media (max-width: 1000px) {
-      width: 350px;
-    }
-
-    @media (max-width: 830px) {
-      flex-grow: 1;
-      margin-left: 10px;
+    @media (max-width: 880px) {
+      max-width: 300px;
+      margin: 0 10px;
     }
   }
 
-     .sort {
-       display: flex;
-       gap: 6px;
-       flex-direction: column;
-     }
-  
-     .sort div {
-       display: flex;
-       gap: 5px;
-     }
-  
-     .sort input {
-       padding: 1.5px;
-     }
+  .sort {
+    display: flex;
+    gap: 6px;
+    flex-direction: column;
+  }
+
+  .sort div {
+    display: flex;
+    gap: 5px;
+  }
+
+  .sort input {
+    padding: 1.5px;
+  }
 
   .nav-right {
     display: flex;
@@ -76,7 +77,7 @@ nav {
       display: inline-block;
       font-size: 1rem;
       text-transform: uppercase;
-      transition: .3s;
+      transition: 0.3s;
       cursor: pointer;
       position: relative;
       border-radius: 0px;
@@ -91,59 +92,41 @@ nav {
       }
     }
 
-    // .historyBtn {
-    //   background-image: linear-gradient(-60deg, #16a085 0%, #f4d03f 100%);
-    //   text-decoration: none;
-    //   padding: 10px 50px;
-    //   margin-right: 10px;
-    // }
-
-    // .getOrderBtn {
-    //   background: linear-gradient(to bottom, #4dc7d9 0%, #66a6ff 100%);
-    //   padding: 10px 20px;
-    //   &:hover {
-    //     transform: translateY(-3px);
-    //     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
-
-    //     #plusIcon {
-    //       transform: rotate(90deg);
-    //     }
-    //   }
-    //   #plusIcon{
-    //     margin-right: 5px;
-    //   }
-    // }
     .historyBtn {
-      border: 1.5px solid #000000;
-      padding: .8rem 2rem;
+      // border: 1.5px solid #000000;
+      border: none;
+      padding: 0.8rem 2rem;
       box-sizing: border-box;
-      background: #ffffff;
-      color: #000000;
+      // background: #ffffff;
+      background-image: radial-gradient(circle farthest-corner at 10% 20%,
+          rgba(239, 87, 87, 0.74) 0%,
+          rgba(245, 123, 13, 0.74) 90.2%);
+      color: #ffffff;
 
       &::before {
-        content: '';
+        content: "";
         position: absolute;
         left: 5px;
         top: 5px;
-        border-top: 2px solid #000000;
-        border-left: 2px solid #000000;
+        border-top: 2px solid white;
+        border-left: 2px solid white;
         width: 0px;
         height: 0px;
         opacity: 0;
-        transition: .3s;
+        transition: 0.3s;
       }
 
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         right: 5px;
         bottom: 5px;
-        border-bottom: 2px solid #000000;
-        border-right: 2px solid #000000;
+        border-bottom: 2px solid white;
+        border-right: 2px solid white;
         width: 0px;
         height: 0px;
         opacity: 0;
-        transition: .3s;
+        transition: 0.3s;
       }
 
       &:hover::after,
@@ -155,15 +138,18 @@ nav {
     }
 
     .getOrderBtn {
+      // border: 1px solid #000000;
+      border: none;
+      padding: 0.8rem 1.2rem;
 
-      border: 1px solid #000000;
-      padding: .8rem 1.2rem;
-
-      background: black;
+      // background: black;
+      background-image: radial-gradient(circle farthest-corner at 10% 20%,
+          rgba(7, 121, 222, 1) 0%,
+          rgba(20, 72, 140, 1) 90%);
       color: #fff;
 
       &::before {
-        content: '';
+        content: "";
         position: absolute;
         left: 5px;
         top: 5px;
@@ -172,11 +158,11 @@ nav {
         width: 0px;
         height: 0px;
         opacity: 0;
-        transition: .3s;
+        transition: 0.3s;
       }
 
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         right: 5px;
         bottom: 5px;
@@ -185,13 +171,12 @@ nav {
         width: 0px;
         height: 0px;
         opacity: 0;
-        transition: .3s;
+        transition: 0.3s;
       }
 
       &:hover {
         box-shadow: 4px 0px 10px rgb(184, 184, 184);
         // transform: translateY(-5px);
-
       }
 
       &:hover::after,
@@ -199,6 +184,32 @@ nav {
         height: 20px;
         width: 20px;
         opacity: 1;
+      }
+    }
+  }
+
+  .dropdown {
+    display: none;
+    cursor: pointer;
+  }
+
+  .css-dev-only-do-not-override-17a39f8.ant-btn {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  @media (max-width: 660px) {
+    padding-right: 15px;
+
+    .nav-right {
+      display: none;
+    }
+
+    .dropdown {
+      display: block;
+
+      #hambuger {
+        padding-bottom: 5px !important;
       }
     }
   }

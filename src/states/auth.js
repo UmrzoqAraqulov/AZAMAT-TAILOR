@@ -21,6 +21,8 @@ export const useAuth = create((set) => ({
         if (userName === "admin") navigate("/admin");
         else navigate("/tailor");
       }
+    }catch(err){
+      console.log(err.message);
     } finally {
       set({ loading: false });
     }

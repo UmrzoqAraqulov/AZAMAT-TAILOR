@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import { useOrders } from "../states/orders";
 import "./table.scss";
 import moreBtn from "../assets/images/more.svg";
+import { request } from "../server/request";
 
-
-const Table = ({ page, pageLimit, handlePage }) => {
+const Table = ({ page, pageLimit, handlePage, editOrder }) => {
   const { loading, ordersData, total } = useOrders();
+  
   return (
-    <section>
+    <section className="table-wrapper">
       {loading ? (
         <div className="loader">
           <Spin size="large" />
@@ -51,20 +52,24 @@ const Table = ({ page, pageLimit, handlePage }) => {
                 <td>{el?.endDate?.split("T")[0]}</td>
                 <td>{el?.createdAt?.split("T")[0]}</td>
                 <td>{el?.toPay}</td>
-                <td className="last-td"><img src={moreBtn} alt="" /></td>
+                <td onClick={() => editOrder(el.id)} className="last-td">
+                  <img src={moreBtn} alt="" />
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
-      {!loading?<Pagination
-        current={page}
-        total={total}
-        onChange={handlePage}
-        defaultPageSize={pageLimit}
-        defaultCurrent={page}
-        className="pagination"
-      />:null}
+      {!loading ? (
+        <Pagination
+          current={page}
+          total={total}
+          onChange={handlePage}
+          defaultPageSize={pageLimit}
+          defaultCurrent={page}
+          className="pagination"
+        />
+      ) : null}
     </section>
   );
 };
@@ -73,5 +78,6 @@ Table.propTypes = {
   page: PropTypes.number,
   pageLimit: PropTypes.number,
   handlePage: PropTypes.func,
+  editOrder: PropTypes.func,
 };
 export default Table;

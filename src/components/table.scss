@@ -1,18 +1,22 @@
+.table-wrapper{
+  overflow-x: auto;
+}
+
 #table {
   width: 100%;
   border-collapse: collapse;
 
   thead {
-    background-color: #000000;
+    background-color: #172F6C;
 
     .th-tr {
-      background-color: #000000;
+      background-color: #172F6C;
       th {
         text-align: left;
         padding: 10px 0;
         color: white;
         font-size: 14px;
-        background-color: #000000;
+        background-color: #172F6C;
       }
 
       .first-th {
@@ -131,6 +135,21 @@
       }
     }
   }
+    @media (max-width: 768px) {
+      th {
+        font-size: 12px;
+        font-weight: 400;
+        padding: 8px 0;
+      }
+  
+      td {
+        font-size: 11px;
+      }
+    }
+  
+    @media(max-width:660px) {
+      min-width: 670px !important;
+    }
 }
 
 .pagination{

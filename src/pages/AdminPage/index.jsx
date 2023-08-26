@@ -4,18 +4,27 @@ import { useNavigate } from "react-router-dom";
 import Table from "../../components/Table";
 
 import logo from "../../assets/images/logo.svg";
-import searchIcon from "../../assets/images/icons8-search.svg";
+import searchIcon from "../../assets/images/search.svg";
+import hamburger from "../../assets/images/hamburger.svg";
+
 import "../style.scss";
 import "./admin.scss";
 import FormCustom from "../../components/FormCustom";
+import {  } from "antd";
+import { Form, Button, Dropdown } from "antd";
 
 const AdminPage = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const { getOrders } = useOrders();
+  const [selected, setSelected] = useState(null);
   const [show, setShow] = useState(false);
   const [page, setPage] = useState(+localStorage.getItem("pageAdmin") || 1);
+  const [form] = Form.useForm();
+
   const pageLimit = 10;
+
+  const params = { page, pageLimit, search, selected, form };
 
   useEffect(() => {
     getOrders({ page, pageLimit, search });
@@ -31,7 +40,29 @@ const AdminPage = () => {
     else setSearch(e.target.value);
   };
 
-  const TableValues = { page, pageLimit, handlePage };
+  const TableValues = { page, pageLimit, handlePage, setSelected, form };
+
+  // <----------------- Dropdown -------------------- </>
+  const items = [
+    {
+      key: "1",
+      label: (
+        <Button onClick={() => navigate("/history")} type="primary">
+          Tarix
+        </Button>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <Button onClick={() => setShow(true)} type="primary">
+          +Buyurtma
+        </Button>
+      ),
+    },
+  ];
+
+  // -------------------------------------------------------
 
   return (
     <Fragment>
@@ -45,7 +76,7 @@ const AdminPage = () => {
             id="search"
           />
           <label className="searchIcon" htmlFor="search">
-            <img src={searchIcon} alt="searchIcon" />
+            <img width="30px" src={searchIcon} alt="searchIcon" />
           </label>
         </div>
 
@@ -63,6 +94,19 @@ const AdminPage = () => {
             + Buyurtma
           </button>
         </div>
+        {/* -----------------Dropdown------------------- */}
+        <Dropdown
+          menu={{
+            items,
+          }}
+          placement="bottomRight"
+          className="dropdown"
+        >
+          <Button>
+            <img width="30px" src={hamburger} alt="hambuger" id="hamburger" />
+          </Button>
+        </Dropdown>
+        {/* ---------------------------------------------- */}
       </nav>
       <Table {...TableValues} />
       <div
@@ -74,7 +118,7 @@ const AdminPage = () => {
         <div className="close-btn">
           <i onClick={() => setShow(false)} className="fa-solid fa-xmark"></i>
         </div>
-        <FormCustom />
+        <FormCustom {...params} />
       </div>
     </Fragment>
   );

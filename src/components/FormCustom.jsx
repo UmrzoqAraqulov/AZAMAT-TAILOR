@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {
   Button,
   Checkbox,
@@ -9,15 +10,57 @@ import {
 } from "antd";
 import "./formStyle.scss";
 import { useState } from "react";
+import { useOrders } from "../states/orders";
+import { request } from "../server/request";
 
-const FormCustom = () => {
+const FormCustom = ({ page, pageLimit, search,selected,form,dropdownShow,setDropdownShow }) => {
+  const { postOrder, getOrders,putOrder } = useOrders();
+  const [dropdownData, setDropdownData] = useState([]);
   const [costumeValue, setCostumeValue] = useState();
   const [trouthersValue, setTrouthersValue] = useState();
+  const [customerId, setCustomerId] = useState(null);
   const [jacketValue, setJacketValue] = useState();
+  const order = {};
 
-  const submit = async (e) => {
-    e.preventDefault();
-    console.log(e.target.value);
+  const getProduct = () => {
+    let res = "";
+    res += costumeValue ? costumeValue : "";
+    res += trouthersValue ? trouthersValue : "";
+    res += jacketValue ? jacketValue : "";
+    return res;
+  };
+
+  const setCustomer = (customerInfo) => {
+    setCustomerId(customerInfo.id);
+    form.setFieldValue("customer", customerInfo.customer);
+    setDropdownShow(false);
+  };
+
+  const submit = async (values) => {
+    if(selected){
+      const id = selected;
+      putOrder({ id ,values});
+    }else{
+      let arr = [];
+      let res = { ...values };
+      order.customerId = customerId;
+      order.products = getProduct();
+      delete res.customer;
+      order.toPay = res.price;
+      delete res.price;
+      order.notes = res.notes ? res.notes : "";
+      delete res.notes;
+      order.priority = res.priority;
+      delete res.priority;
+      order.endDate = res.endDate;
+      delete res.endDate;
+      for (let i in res) {
+        arr.push({ name: i, value: res[i] });
+      }
+      order.params = arr;
+      postOrder(order);
+    }
+    getOrders({ page, pageLimit, search });
   };
 
   const onChangeCostume = (e) => {
@@ -29,14 +72,41 @@ const FormCustom = () => {
   const onChangeJacket = (e) => {
     setJacketValue(e.target.value);
   };
+
+  const autoComplete = async (e) => {
+    const text = e.target.value;
+    if (text.length > 2) {
+      try {
+        setDropdownShow(true);
+        const { data } = await request.post("orders/in_process", {
+          searchText: text,
+        });
+        setDropdownData(data.page.items);
+      } catch {
+        console.log("Error");
+      }
+    } else {
+      setDropdownShow(false);
+    }
+  };
+
   return (
     <div>
       <div className="modal-forms">
-        <Form className="" onFinish={submit} initialValues={{ priority: false }}>
+        <Form
+          form={form}
+          className=""
+          onFinish={submit}
+          initialValues={{ priority: false }}
+        >
+          <div className="addOrderModal">
+            <div className="customerName">
+              <label htmlFor="customer">Mijoz</label>
               <Form.Item
                 name="customer"
                 id="customer"
                 hasFeedback
+                onChange={autoComplete}
                 rules={[
                   {
                     required: true,
@@ -46,9 +116,17 @@ const FormCustom = () => {
               >
                 <Input />
               </Form.Item>
-          <div className="addOrderModal">
-            <div>
-              <label htmlFor="customer">Mijoz</label>
+              {dropdownShow ? (
+                <ul className="customerDropdown">
+                  {dropdownData?.map((el) => (
+                    <li onClick={() => setCustomer(el)} key={el.id}>
+                      {el.customer}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                ""
+              )}
             </div>
             <div>
               <label htmlFor="endDate">Muddat</label>
@@ -84,7 +162,7 @@ const FormCustom = () => {
             </div>
             <div className="checkBox">
               <label htmlFor="priority">Ustuvorlik</label>
-              <Form.Item name="priority" id="priority">
+              <Form.Item name="priority" id="priority" valuePropName="checked">
                 <Checkbox />
               </Form.Item>
             </div>
@@ -345,6 +423,16 @@ const FormCustom = () => {
       </div>
     </div>
   );
+};
+
+FormCustom.propTypes = {
+  search: PropTypes.string,
+  page: PropTypes.number,
+  pageLimit: PropTypes.number,
+  form:PropTypes.object,
+  selected:PropTypes.number,
+  dropdownShow:PropTypes.bool,
+  setDropdownShow:PropTypes.func,
 };
 
 export default FormCustom;
